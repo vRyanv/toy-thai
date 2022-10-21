@@ -56,8 +56,8 @@ if(isset($_POST['btnRegister']))
         $res = pg_query($conn,$sq);
         if(pg_num_rows($res)==0)
         {
-            pg_query($conn, "INSERT INTO customer (Username, Password, CustName, gender, Address, telephone,
-            email, CusDate, CusMonth, CusYear, SSN, ActiveCode, state)
+            pg_query($conn, "INSERT INTO customer (username, password, custname, gender, address, telephone,
+            email, cusdate, cusmonth, cusyear, ssn, activecode, state)
             VALUES ('$us', '$pass', '$fullname', $sex, '$address', '$tel', '$email',
             $date, $month, $year, '', '',0)") or die(pg_result_error($conn));
             echo "You have registered successfully";
@@ -75,7 +75,7 @@ if(isset($_POST['btnRegister']))
 			 	<form id="form1" name="form1" method="post" action="" class="form-horizontal" role="form">
 					<div class="form-group">
 						    
-                            <label for="txtTen" class="col-sm-2 control-label">Username(*):  </label>
+                            <label for="txtTen" class="col-sm-2 control-label">uername(*):  </label>
 							<div class="col-sm-10">
 							      <input type="text" name="txtUsername" id="txtUsername" class="form-control" placeholder="Username" value=""/>
 							</div>
