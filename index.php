@@ -131,22 +131,14 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.php" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">Introduction<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="">History</a></li>
-										<li><a href="">Branch system</a></li> 
-										<li><a href="">Payments</a></li> 
-                                    </ul>
-                                </li> 
+							
 								<li class="dropdown"><a href="#">Management<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="?page=category_management">Category</a></li>
 										<li><a href="?page=product_management">Product</a></li>
                                     </ul>
                                 </li> 
-								<li><a href="#">Cart</a></li>
-								<li><a href="#">Contact</a></li>
+								
 							</ul>
 						</div>
 					</div>
