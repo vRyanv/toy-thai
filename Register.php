@@ -59,7 +59,7 @@ if(isset($_POST['btnRegister']))
             pg_query($conn, "INSERT INTO customer (username, password, custname, gender, address, telephone,
             email, cusdate, cusmonth, cusyear, ssn, activecode, state)
             VALUES ('$us', '$pass', '$fullname', $sex, '$address', '$tel', '$email',
-            $date, $month, $year, '', '',0)") or die(pg_result_error($conn));
+            $date, $month, $year, '1', '1',0)") or die(pg_result_error($conn));
             echo "You have registered successfully";
         }
         else{
