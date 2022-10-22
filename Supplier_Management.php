@@ -78,14 +78,6 @@ else{
                 ?>
                 </tbody>
             </table>
-
-
-
-            <!--Nut them moi nut xoa tat ca->
-            <div class="row" style="background-color:#FFF">Nut chuc nang -->
-            <div class="col-md-12">
-
-            </div>
     </div>
     </form>
     </div>

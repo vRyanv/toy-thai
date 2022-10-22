@@ -83,23 +83,21 @@ include_once("connection.php");
                             }
 		
 			            
-			                while($row = pg_fetch_all($result, PGSQL_ASSOC)){
+			                while($row = pg_fetch_array($result,null, PGSQL_ASSOC)){
 				            ?>
 
 				            <!--One product -->
                             <div class="single-product">
                                 <div class="product-f-image">
-                                    <img src="product-imgs/<?php echo $row['Pro_image']?>" width="150" height="150">
+                                    <img src="product-imgs/<?php echo $row['pro_image']?>" style="height: 13rem;width: 13rem;">
                                     <div class="product-hover">
-                                        <a href="?func=dathang&ma=<?php echo  $row['Product_ID']?>" class="add-to-cart-link" ><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="?page=quanly_chitietsanpham&ma=<?php echo  $row['Product_ID']?>" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        <a href="?page=quanly_chitietsanpham&ma=<?php echo  $row['product_id']?>" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>
-                                
-                                <h2><a href="?page=quanly_chitietsanpham&ma=<?php echo  $row['Product_ID']?>"><?php echo  $row['Product_Name']?></a></h2>
+                                <h2><?php echo  $row['product_name']?></h2>
                                 
                                 <div class="product-carousel-price">
-                                    <ins><?php echo  $row['Price']?></ins>
+                                    <ins><?php echo  $row['price']?></ins>
                                 </div> 
                             </div>
                 <?php

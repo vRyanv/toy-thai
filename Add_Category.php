@@ -35,7 +35,7 @@
 	}
 ?>
 
-<div class="" style="padding: 4rem 23rem 1rem 33rem;">
+<div class="" style="padding: 5% 10% 6% 18%;">
 	<h3 style="text-align: start; padding-left: 1rem">Adding Category</h3>
 			 	<form id="form1" name="form1" method="post" action="" class="form-horizontal" role="form">
 				 <div class="form-group">

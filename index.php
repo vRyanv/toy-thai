@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/icon-web.png">
     <title>children's toy world</title>
 
     <!-- Google Fonts -->
@@ -123,17 +124,23 @@ if(isset($_GET['page']))
         elseif($page=="category_management"){
             include_once("Category_Management.php");
         }
-        elseif($page=="supplier_management"){
-            include_once("Supplier_Management.php");
-        }
-        elseif($page=="product_management"){
-            include_once("Product_Management.php");
-        }
         elseif($page=="add_category"){
             include_once("Add_Category.php");
         }
         elseif($page=="update_category"){
             include_once("Update_Category.php");
+        }
+        elseif($page=="supplier_management"){
+            include_once("Supplier_Management.php");
+        }
+        elseif($page=="add_supplier"){
+            include_once("Add_Supplier.php");
+        }
+        elseif($page=="update_supplier"){
+            include_once("Update_Supplier.php");
+        }
+        elseif($page=="product_management"){
+            include_once("Product_Management.php");
         }
         elseif($page=="logout"){
             include_once("Logout.php");

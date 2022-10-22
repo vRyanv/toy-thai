@@ -66,7 +66,8 @@
        if ($err == "") {
            $sq = "Select * from category where cat_name='$name'";
            $result = pg_query($conn, $sq);
-           if (pg_num_rows($result) != 1) {
+           $err =  pg_num_rows($result);
+           if (pg_num_rows($result) == 1) {
                pg_query($conn, "UPDATE category SET cat_name = '$name', cat_des='$des' WHERE cat_id='$id'");
                echo '<meta http-equiv="refresh" content="0;URL=?page=category_management"/>';
            } else {

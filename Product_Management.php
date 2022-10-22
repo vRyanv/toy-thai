@@ -31,21 +31,19 @@ if(isset($_GET["function"])=="del")
     }
 ?>
  <!-- Bootstrap -->
-
+    <div style="padding: 2rem 2rem 0 2rem;">
         <form name="frm" method="post" action="">
-        <h1>Product Management</h1>
-        <p>
-        	<img src="images/add.png" alt="Add new" width="16" height="16" border="0" /><a href="?page=add_product"> Add new</a>
+        <p style="text-align: end">
+        	<img src="images/add.png" alt="Add new" width="16" height="16" border="0" /><a href="?page=add_product" style="color: black!important;"> Add new</a>
         </p>
         <table id="tableproduct" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th><strong>No.</strong></th>
-                    <th><strong>Product ID</strong></th>
-                    <th><strong>Product Name</strong></th>
+                    <th><strong>Name</strong></th>
                     <th><strong>Price</strong></th>
                     <th><strong>Quantity</strong></th>
-                    <th><strong>Category ID</strong></th>
+                    <th><strong>Category</strong></th>
                     <th><strong>Image</strong></th>
                     <th><strong>Edit</strong></th>
                     <th><strong>Delete</strong></th>
@@ -56,23 +54,21 @@ if(isset($_GET["function"])=="del")
             <?php
                 include_once("connection.php");
 				$No=1;
-                $result = pg_query($conn, "SELECT product_id, product_name, price, pro_qty, pro_image, cat_id
-                FROM product a, category b
-                WHERE a.cat_id= b.cat_id ORDER BY prodate DESC");
+                $query = "SELECT p.product_id, p.product_name, p.price, p.pro_qty, p.pro_image, c.cat_name FROM product as p, category as c WHERE p.cat_id= c.cat_id";
+                $result = pg_query($conn, $query);
 
-                While($row=pg_fetch_array($result)){
+                While($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
 			?>
 			<tr>
               <td ><?php echo $No;  ?></td>
-              <td ><?php echo $row["product_id"]; ?></td>
-              <td><?php  echo $row["product_name"];?></td>
+              <td ><?php echo $row["product_name"]; ?></td>
               <td><?php  echo $row["price"];?></td>
-              <td ><?php echo $row["pro_qty"]; ?></td>
-              <td><?php echo $row["cat_id"]; ?></td>
-             <td align='center' class='cotNutChucNang'>
+              <td><?php  echo $row["pro_qty"];?></td>
+              <td ><?php echo $row["cat_name"]; ?></td>
+              <td align='center' class='cotNutChucNang'>
                  <img src='product-imgs/<?php echo $row['pro_image'] ?>' border='0' width="50" height="50"  /></td>
-             <td align='center' class='cotNutChucNang'><a href="?page=update_product&&id=<?php echo $row['product_id']; ?>"><img src='images/edit.png' border='0'/></a></td>
-             <td align='center' class='cotNutChucNang'><a href="?page=product_management&&function=del&&id=<?php echo $row["product_id"]; ?>" onclick="return deleteConfirm()"><img src='images/delete.png' border='0' /></a></td>
+              <td align='center' class='cotNutChucNang'><a href="?page=update_product&&id=<?php echo $row['product_id']; ?>"><img src='images/edit.png' border='0'/></a></td>
+              <td align='center' class='cotNutChucNang'><a href="?page=product_management&&function=del&&id=<?php echo $row["product_id"]; ?>" onclick="return deleteConfirm()"><img src='images/delete.png' border='0' /></a></td>
             </tr>
             <?php
                $No++;
@@ -86,6 +82,7 @@ if(isset($_GET["function"])=="del")
                 </div>
             </div>
  </form>
+    </div>
 <?php
         }
 ?>
