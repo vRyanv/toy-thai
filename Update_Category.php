@@ -28,10 +28,6 @@
 		$cat_name = $row['cat_name'];
 		$cat_des = $row['cat_des'];
 	}
-	else
-	{
-		header('Location: index.php');
-	}	
 ?>
 
 <div class="" style="padding: 4rem 23rem 1rem 33rem;">

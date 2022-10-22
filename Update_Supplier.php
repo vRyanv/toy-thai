@@ -31,8 +31,6 @@ include_once("connection.php");
         $row = pg_fetch_array($result, null,PGSQL_ASSOC);
         $sup_name = $row['sup_name'];
         $sup_address = $row['sup_address'];
-    } else{
-        header('Location: index.php');
     }
 ?>
 
