@@ -85,7 +85,7 @@ if(isset($_POST["btnUpdate"])) {
         $result = pg_query($conn, $sq);
         if (pg_num_rows($result) == 1 || pg_num_rows($result) == 0) {
             pg_query($conn, "UPDATE supplier SET sup_name = '$name', sup_address='$address' WHERE sup_id='$id'");
-            header('Location: ?page=supplier_management');
+            echo '<meta http-equiv="refresh" content="0;URL=?page=supplier_management"/>';
         } else {
             $err .=  "<li style='color: red'>Duplicate supplier name</li>";
         }

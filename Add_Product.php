@@ -91,7 +91,8 @@
                         $sqlstring = "INSERT INTO product(product_name, price, pro_qty, pro_image, cat_id, sup_id, shop_id) 
                                         VALUES('$proName','$price','$qty','$filePic', '$category','$supplier', '$shop')";
                         pg_query($conn, $sqlstring);
-                        header('Location: ?page=product_management');
+                        echo '<meta http-equiv="refresh" content="0;URL=?page=product_management"/>';
+
                     }
                     else
                     {

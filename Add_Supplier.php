@@ -44,7 +44,7 @@ if(isset($_POST["btnAdd"]))
         if(pg_num_rows($result)==0)
         {
             pg_query($conn, "INSERT INTO supplier (sup_name, sup_address) VALUES('$name','$address')");
-            header('Location: ?page=supplier_management');
+            echo '<meta http-equiv="refresh" content="0;URL=?page=supplier_management"/>';
         }
         else
         {

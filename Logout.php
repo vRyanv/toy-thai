@@ -3,5 +3,5 @@ if(session_id() == '') {
     session_start();
 }
 session_destroy();
-header('Location: index.php?page=login');
+echo '<meta http-equiv="refresh" content="0;URL=?page=login"/>';
 ?>

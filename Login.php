@@ -29,7 +29,7 @@ if (isset($_POST['btnLogin']))
             $_SESSION["us"] = $us;
             $_SESSION["role"] = $row['state'];
             $_SESSION["shop"] = $row['shop_id'];
-            header('Location: index.php');
+            echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
         }
         else{
             $err.= "<p style='color: red; text-align: center'>Username or password wrong!</p>";
