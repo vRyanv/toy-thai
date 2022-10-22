@@ -167,7 +167,7 @@
 							WHERE product_id='$id'";
 
 							pg_query($conn, $sqlstring);
-							echo '<meta http-equiv="refresh" content = "0; URL=?page=product_management"/>';
+                            header('Location: ?page=product_management');
 						} else {
                             $err .=  "<li style='color: red'>Duplicate name</li>";
 						}
@@ -187,7 +187,7 @@
 					 WHERE product_id='$id'";
 
 					pg_query($conn, $sqlstring);
-					echo '<meta http-equiv="refresh" content="0;URL=?page=product_management"/>';
+					header('Location: ?page=product_management');
 				} else {
 					echo "<li style='color: red'>Duplicate name</li>".pg_num_rows($result).$proName;
 				}

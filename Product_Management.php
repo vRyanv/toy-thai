@@ -7,7 +7,7 @@ if(isset($_SESSION["role"]) && $_SESSION["role"] != 1)
     ?>
     <script>alert("You are not admin")</script>
     <?php
-    header('Location: index.php');
+    echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
 }
 else{
 ?>

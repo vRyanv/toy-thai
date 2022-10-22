@@ -2,19 +2,32 @@
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <meta charset="utf-8" />
 <?php
+    if(session_id() == '') {
+        session_start();
+    }
+    if(isset($_SESSION["role"]) && $_SESSION["role"] != 1)
+    {
+        ?>
+        <script>alert("You are not admin")</script>
+        <?php
+        echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+    }
+    else {
+?>
+
+<?php
 include_once("connection.php");
-if(isset($_GET["id"]))
-{
-    $id = $_GET["id"];
-    $result = pg_query($conn, "SELECT * FROM supplier WHERE sup_id='$id'");
-    $row = pg_fetch_array($result, null,PGSQL_ASSOC);
-    $sup_name = $row['sup_name'];
-    $sup_address = $row['sup_address'];
-}
-else
-{
-    echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
-}
+
+    if(isset($_GET["id"]))
+    {
+        $id = $_GET["id"];
+        $result = pg_query($conn, "SELECT * FROM supplier WHERE sup_id='$id'");
+        $row = pg_fetch_array($result, null,PGSQL_ASSOC);
+        $sup_name = $row['sup_name'];
+        $sup_address = $row['sup_address'];
+    } else{
+        header('Location: index.php');
+    }
 ?>
 
 <div class="" style="padding: 5% 10% 6% 18%;">
@@ -68,7 +81,7 @@ if(isset($_POST["btnUpdate"])) {
         $result = pg_query($conn, $sq);
         if (pg_num_rows($result) == 1 || pg_num_rows($result) == 0) {
             pg_query($conn, "UPDATE supplier SET sup_name = '$name', sup_address='$address' WHERE sup_id='$id'");
-            echo '<meta http-equiv="refresh" content="0;URL=?page=supplier_management"/>';
+            header('Location: ?page=supplier_management');
         } else {
             $err .=  "<li style='color: red'>Duplicate supplier name</li>";
         }
@@ -76,16 +89,19 @@ if(isset($_POST["btnUpdate"])) {
 }
 ?>
 
-<?php
-if(isset($err) && $err != ''){
-    ?>
-    <script>
-        $(document).ready(function (){
-            $('#error_update').append("<?php echo $err ?>")
-        })
-    </script>
     <?php
-}
-?>
+        if(isset($err) && $err != ''){
+    ?>
+        <script>
+            $(document).ready(function (){
+                $('#error_update').append("<?php echo $err ?>")
+            })
+        </script>
+    <?php
+    }
+    ?>
 
+<?php
+ }
+?>
 

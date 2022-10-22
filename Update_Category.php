@@ -24,7 +24,7 @@
 	}
 	else
 	{
-		echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+		header('Location: index.php');
 	}	
 ?>
 
@@ -80,7 +80,7 @@
            $err =  pg_num_rows($result);
            if (pg_num_rows($result) == 1 || pg_num_rows($result) == 0) {
                pg_query($conn, "UPDATE category SET cat_name = '$name', cat_des='$des' WHERE cat_id='$id'");
-               echo '<meta http-equiv="refresh" content="0;URL=?page=category_management"/>';
+               header('Location: ?page=category_management');
            } else {
                $err .=  "<li style='color: red'>Duplicate category Name</li>";
            }
