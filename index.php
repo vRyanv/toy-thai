@@ -46,7 +46,9 @@
 <body>
 
 <?php
-session_start();
+if(session_id() == '') {
+    session_start();
+}
 include_once("connection.php");
 if(isset($_GET['page']))
 {
@@ -66,8 +68,11 @@ if(isset($_GET['page']))
         <div class="" id="navbarNavDropdown" style="">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if($page == 'home') {?>animate-character<?php } ?>" href="index.php">Home</a>
+                    <a class="nav-link <?php if($page == 'home' || $page == 'view_detail_product' || $page == 'login' || $page == 'register') {?>animate-character<?php } ?>" href="index.php">Home</a>
                 </li>
+                <?php
+                    if(isset($_SESSION["role"]) && $_SESSION["role"] == '1'){
+                ?>
                 <li class="nav-item">
                     <a class="nav-link <?php if($page == 'category_management' || $page == 'add_category' || $page == 'update_category') {?>animate-character <?php } ?>" href="?page=category_management">Category</a>
                 </li>
@@ -77,6 +82,9 @@ if(isset($_GET['page']))
                 <li class="nav-item">
                     <a class="nav-link <?php if($page == 'product_management') {?>animate-character <?php } ?>"  href="?page=product_management">Product</a>
                 </li>
+                <?php
+                }
+                ?>
             </ul>
         </div>
         <div class="action-user">
@@ -84,8 +92,8 @@ if(isset($_GET['page']))
             if (isset($_SESSION['us']) && $_SESSION['us'] != "") {
                 ?>
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a style="color:#FFF" href="?page=update_customer">
-                            <i class="fa fa-user"></i>Welcome <?php echo $_SESSION['us'] ?></a>
+                    <li class="nav-item" style="color: #FFFFFF">
+                            <i class="fa fa-user"></i>Welcome <?php echo $_SESSION['us'] ?>
                     </li class="nav-item">
                     <li>
                         <a href="?page=logout" style="margin-left: 3rem;;color:#FFF">
@@ -153,6 +161,8 @@ if(isset($_GET['page']))
         }
         elseif($page=="update_product"){
             include_once("Update_Product.php");
+        } elseif($page=="view_detail_product"){
+            include_once("ViewDetailPro.php");
         }
     }
     else{

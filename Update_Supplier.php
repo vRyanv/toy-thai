@@ -17,7 +17,7 @@ else
 }
 ?>
 
-<div class="" style="padding: 4rem 23rem 1rem 33rem;">
+<div class="" style="padding: 5% 10% 6% 18%;">
     <h3 style="text-align: start; padding-left: 1rem">Updating Supplier</h3>
     <form id="form1" name="form1" method="post" action="" class="form-horizontal" role="form">
         <input type="hidden" value='<?php echo $id ;?>' name="txtId">
@@ -66,7 +66,7 @@ if(isset($_POST["btnUpdate"])) {
     if ($err == "") {
         $sq = "Select * from supplier where sup_name='$name'";
         $result = pg_query($conn, $sq);
-        if (pg_num_rows($result) == 1) {
+        if (pg_num_rows($result) == 1 || pg_num_rows($result) == 0) {
             pg_query($conn, "UPDATE supplier SET sup_name = '$name', sup_address='$address' WHERE sup_id='$id'");
             echo '<meta http-equiv="refresh" content="0;URL=?page=supplier_management"/>';
         } else {

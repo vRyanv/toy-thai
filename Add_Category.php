@@ -1,4 +1,17 @@
-     <!-- Bootstrap --> 
+<?php
+    if(session_id() == '') {
+        session_start();
+    }
+    if(isset($_SESSION["role"]) && $_SESSION["role"] != 1)
+    {
+        ?>
+        <script>alert("You are not admin")</script>
+        <?php
+        echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+    }
+    else{
+?>
+     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="style.css"/>
 	<meta charset="utf-8" />
 <?php
@@ -76,3 +89,5 @@
 <?php
     }
 ?>
+
+<?php } ?>

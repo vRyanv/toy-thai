@@ -1,10 +1,6 @@
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <meta charset="utf-8" />
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/responsive.css">
-<script src="js/jquery-3.2.0.min.js"/></script>
-<script src="js/jquery.dataTables.min.js"/></script>
-<script src="js/dataTables.bootstrap.min.js"/></script>
+
 <?php
 if(isset($_POST['btnRegister']))
 {
@@ -70,62 +66,65 @@ if(isset($_POST['btnRegister']))
 
 
 ?>
-<div class="container">
-        <h2>Member Registration</h2>
+<div class="" style="padding: 5% 22% 6% 20%;">
+            <div class="content" style="transform: translateX(28%);">
+                <h2>Member Registration</h2>
+                <h2>Member Registration</h2>
+            </div>
 			 	<form id="form1" name="form1" method="post" action="" class="form-horizontal" role="form">
 					<div class="form-group">
 						    
-                            <label for="txtTen" class="col-sm-2 control-label">uername(*):  </label>
-							<div class="col-sm-10">
+                            <label for="txtTen" class="col control-label">Username(*):  </label>
+							<div class="col">
 							      <input type="text" name="txtUsername" id="txtUsername" class="form-control" placeholder="Username" value=""/>
 							</div>
                       </div>  
                       
                        <div class="form-group">   
-                            <label for="" class="col-sm-2 control-label">Password(*):  </label>
-							<div class="col-sm-10">
+                            <label for="" class="col control-label">Password(*):  </label>
+							<div class="col">
 							      <input type="password" name="txtPass1" id="txtPass1" class="form-control" placeholder="Password"/>
 							</div>
                        </div>     
                        
                        <div class="form-group"> 
-                            <label for="" class="col-sm-2 control-label">Confirm Password(*):  </label>
-							<div class="col-sm-10">
+                            <label for="" class="col control-label">Confirm Password(*):  </label>
+							<div class="col">
 							      <input type="password" name="txtPass2" id="txtPass2" class="form-control" placeholder="Confirm your Password"/>
 							</div>
                        </div>     
                        
                        <div class="form-group">                               
-                            <label for="lblFullName" class="col-sm-2 control-label">Full name(*):  </label>
-							<div class="col-sm-10">
+                            <label for="lblFullName" class="col control-label">Full name(*):  </label>
+							<div class="col">
 							      <input type="text" name="txtFullname" id="txtFullname" value="" class="form-control" placeholder="Enter Fullname"/>
 							</div>
                        </div> 
                        
                        <div class="form-group">      
-                            <label for="lblEmail" class="col-sm-2 control-label">Email(*):  </label>
-							<div class="col-sm-10">
+                            <label for="lblEmail" class="col control-label">Email(*):  </label>
+							<div class="col">
 							      <input type="text" name="txtEmail" id="txtEmail" value="" class="form-control" placeholder="Email"/>
 							</div>
                        </div>  
                        
                         <div class="form-group">   
-                             <label for="lblDiaChi" class="col-sm-2 control-label">Address(*):  </label>
-							<div class="col-sm-10">
+                             <label for="lblDiaChi" class="col control-label">Address(*):  </label>
+							<div class="col">
 							      <input type="text" name="txtAddress" id="txtAddress" value="" class="form-control" placeholder="Address"/>
 							</div>
                         </div>  
                         
                          <div class="form-group">  
-                            <label for="lblDienThoai" class="col-sm-2 control-label">Telephone(*):  </label>
-							<div class="col-sm-10">
+                            <label for="lblDienThoai" class="col control-label">Telephone(*):  </label>
+							<div class="col">
 							      <input type="text" name="txtTel" id="txtTel" value="" class="form-control" placeholder="Telephone" />
 							</div>
                          </div> 
                          
                           <div class="form-group">  
-                            <label for="lblGioiTinh" class="col-sm-2 control-label">Gender(*):  </label>
-							<div class="col-sm-10">                              
+                            <label for="lblGioiTinh" class="col control-label">Gender(*):  </label>
+							<div class="col">
                                       <label class="radio-inline"><input type="radio" name="grpRender" value="0" id="grpRender"  />
                                       Male</label>
                                     
@@ -137,8 +136,8 @@ if(isset($_POST['btnRegister']))
                           </div> 
                           
                           <div class="form-group"> 
-                            <label for="lblNgaySinh" class="col-sm-2 control-label">Date of Birth(*):  </label>
-                            <div class="col-sm-10 input-group">
+                            <label for="lblNgaySinh" class="col control-label">Date of Birth(*):  </label>
+                            <div class="col input-group">
                                 <span class="input-group-btn">
                                   <select name="slDate" id="slDate" class="form-control" >
                 						<option value="0">Choose Date</option>
@@ -176,9 +175,9 @@ if(isset($_POST['btnRegister']))
                            </div>
                       </div>	
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-2 col" style="text-align: end">
 						      <input type="submit"  class="btn btn-primary" name="btnRegister" id="btnRegister" value="Register"/>
-                              	
+
 						</div>
                      </div>
 				</form>

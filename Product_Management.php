@@ -1,10 +1,13 @@
-<?php 
-if(isset($_SESSION["admin"]) && $_SESSION["admin"]!=1)
+<?php
+if(session_id() == '') {
+    session_start();
+}
+if(isset($_SESSION["role"]) && $_SESSION["role"] != 1)
 {
     ?>
     <script>alert("You are not admin")</script>
     <?php
-    echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+    header('Location: index.php');
 }
 else{
 ?>
@@ -25,6 +28,10 @@ if(isset($_GET["function"])=="del")
         if(isset($_GET["id"]))
         {
             $id = $_GET["id"];
+            $result = pg_query($conn, "select pro_image FROM product  WHERE product_id='$id'");
+            $row = pg_fetch_array($result, null, PGSQL_ASSOC);
+            $img = $row['pro_image'];
+            unlink('product-imgs/'.$img);
             pg_query($conn, "DELETE FROM product  WHERE product_id='$id'");
             echo '<meta http-equiv="refresh" content="0;URL=?page=product_management"/>';
         }
@@ -44,6 +51,7 @@ if(isset($_GET["function"])=="del")
                     <th><strong>Price</strong></th>
                     <th><strong>Quantity</strong></th>
                     <th><strong>Category</strong></th>
+                    <th><strong>Supplier</strong></th>
                     <th><strong>Image</strong></th>
                     <th><strong>Edit</strong></th>
                     <th><strong>Delete</strong></th>
@@ -54,7 +62,10 @@ if(isset($_GET["function"])=="del")
             <?php
                 include_once("connection.php");
 				$No=1;
-                $query = "SELECT p.product_id, p.product_name, p.price, p.pro_qty, p.pro_image, c.cat_name FROM product as p, category as c WHERE p.cat_id= c.cat_id";
+                $query = "SELECT p.product_id, p.product_name, p.price, p.pro_qty, p.pro_image, c.cat_name, sp.sup_name
+                            FROM product as p, category as c, supplier as sp
+                            WHERE p.cat_id= c.cat_id
+                            and p.sup_id = sp.sup_id";
                 $result = pg_query($conn, $query);
 
                 While($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
@@ -65,6 +76,7 @@ if(isset($_GET["function"])=="del")
               <td><?php  echo $row["price"];?></td>
               <td><?php  echo $row["pro_qty"];?></td>
               <td ><?php echo $row["cat_name"]; ?></td>
+              <td ><?php echo $row["sup_name"]; ?></td>
               <td align='center' class='cotNutChucNang'>
                  <img src='product-imgs/<?php echo $row['pro_image'] ?>' border='0' width="50" height="50"  /></td>
               <td align='center' class='cotNutChucNang'><a href="?page=update_product&&id=<?php echo $row['product_id']; ?>"><img src='images/edit.png' border='0'/></a></td>

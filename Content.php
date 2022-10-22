@@ -91,7 +91,7 @@ include_once("connection.php");
                                 <div class="product-f-image">
                                     <img src="product-imgs/<?php echo $row['pro_image']?>" style="height: 13rem;width: 13rem;">
                                     <div class="product-hover">
-                                        <a href="?page=quanly_chitietsanpham&ma=<?php echo  $row['product_id']?>" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        <a href="?page=view_detail_product&id=<?php echo  $row['product_id']?>" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                     </div>
                                 </div>
                                 <h2><?php echo  $row['product_name']?></h2>

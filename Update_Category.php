@@ -1,4 +1,15 @@
-     <!-- Bootstrap --> 
+<?php
+    if(session_id() == '') {
+        session_start();
+    }
+    if(isset($_SESSION["role"]) && $_SESSION["role"] != 1)
+    {
+        ?>
+        <script>alert("You are not admin")</script>
+        <?php
+        echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+    } else{
+?>
     <link rel="stylesheet" type="text/css" href="style.css"/>
 	<meta charset="utf-8" />
 <?php
@@ -67,7 +78,7 @@
            $sq = "Select * from category where cat_name='$name'";
            $result = pg_query($conn, $sq);
            $err =  pg_num_rows($result);
-           if (pg_num_rows($result) == 1) {
+           if (pg_num_rows($result) == 1 || pg_num_rows($result) == 0) {
                pg_query($conn, "UPDATE category SET cat_name = '$name', cat_des='$des' WHERE cat_id='$id'");
                echo '<meta http-equiv="refresh" content="0;URL=?page=category_management"/>';
            } else {
@@ -88,5 +99,5 @@
          <?php
      }
      ?>
-
+<?php } ?>
 

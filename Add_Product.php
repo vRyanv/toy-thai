@@ -1,5 +1,19 @@
-    <!-- Bootstrap -->
 <?php
+    if(session_id() == '') {
+        session_start();
+    }
+    if(isset($_SESSION["role"]) && $_SESSION["role"] != 1)
+    {
+        ?>
+        <script>alert("You are not admin")</script>
+        <?php
+        echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+    }
+    else
+    {
+        ?>
+<?php
+
 	include_once("connection.php");
 	function bind_Category_List($conn)
 	{
@@ -51,7 +65,7 @@
             $err.="<li style='color: red'>Choose product supplier</li>";
         }
 
-        if($pic == ''){
+        if($pic['name'] == ''){
             $err.="<li style='color: red'>Choose product image</li>";
         }
 
@@ -66,25 +80,26 @@
                     $result = pg_query($conn,$sq);
                     if(pg_num_rows($result)==0)
                     {
-                        copy($pic['tmp_name'], "product-imgs/".$pic['name']);
-                        $filePic = $pic['name'];
+                        $filePic = uniqid().$pic['name'];
+                        copy($pic['tmp_name'], "product-imgs/".$filePic);
+
                         $sqlstring = "INSERT INTO product(product_name, price, pro_qty, pro_image, cat_id, sup_id) VALUES('$proName','$price','$qty','$filePic', '$category','$supplier')";
                         pg_query($conn, $sqlstring);
                         echo '<meta http-equiv="refresh" content="0;URL=?page=product_management"/>';
                     }
                     else
                     {
-                        $err.= "<li>Duplicate product name</li>";
+                        $err.= "<li style='color: red'>Duplicate product name</li>";
                     }
                 }
                 else
                 {
-                    $err.= "<li>Size of image too big</li>";
+                    $err.= "<li style='color: red'>Size of image too big</li>";
                 }
             }
             else
             {
-                $err.="<li>Image format is not correct</li>";
+                $err.="<li style='color: red'>Image format is not correct</li>";
             }
 		}
 
@@ -172,3 +187,4 @@
             }
         })
     </script>
+<?php } ?>
