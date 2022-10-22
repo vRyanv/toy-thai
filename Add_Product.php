@@ -44,6 +44,7 @@
 
 	if(isset($_POST["btnAdd"]))
 	{
+        $shop = $_SESSION["shop"];
 		$proName = $_POST["txtName"];
 		$price = $_POST['txtPrice'];
 		$qty = $_POST['txtQty'];
@@ -83,9 +84,10 @@
                         $filePic = uniqid().$pic['name'];
                         copy($pic['tmp_name'], "product-imgs/".$filePic);
 
-                        $sqlstring = "INSERT INTO product(product_name, price, pro_qty, pro_image, cat_id, sup_id) VALUES('$proName','$price','$qty','$filePic', '$category','$supplier')";
+                        $sqlstring = "INSERT INTO product(product_name, price, pro_qty, pro_image, cat_id, sup_id, shop_id) 
+                                        VALUES('$proName','$price','$qty','$filePic', '$category','$supplier', '$shop')";
                         pg_query($conn, $sqlstring);
-                        echo '<meta http-equiv="refresh" content="0;URL=?page=product_management"/>';
+                        header('Location: ?page=product_management');
                     }
                     else
                     {

@@ -2,10 +2,11 @@
 include_once("connection.php");
  if(isset($_GET['page']) && $_GET['page'] = 'view_detail_product' && isset($_GET['id'])){
         $proId = $_GET['id'];
-        $query = "SELECT p.product_name, p.price, p.pro_qty, p.pro_image, c.cat_name, sp.sup_name
-                            FROM product as p, category as c, supplier as sp
+        $query = "SELECT p.product_name, p.price, p.pro_qty, p.pro_image, c.cat_name, sp.sup_name, s.shop_name
+                            FROM product as p, category as c, supplier as sp, shop as s
                             WHERE p.cat_id= c.cat_id
                             and p.sup_id = sp.sup_id
+                            and p.shop_id = s.shop_id
                             and p.product_id = '$proId'";
         $result = pg_query($conn, $query);
         $row = pg_fetch_array($result, null,PGSQL_ASSOC);
@@ -15,13 +16,14 @@ include_once("connection.php");
         $img = $row['pro_image'];
         $cateName = $row['cat_name'];
         $supName = $row['sup_name'];
+        $shopName = $row['shop_name'];
  }
 ?>
 
 
 <div style="min-height: 43rem; padding-top: 7rem; text-align: center">
         <div style="display: inline-block;">
-            <img src="product-imgs/<?php echo $img ?>" style="width: 20rem;height: 25rem">
+            <img src="product-imgs/<?php echo $img ?>" style="width: 20rem;height: 25rem; border-radius: 1rem">
         </div>
         <div style="display: inline-block; text-align: left; margin-left: 4rem">
             <div class="content">
@@ -32,6 +34,7 @@ include_once("connection.php");
             <h6 class="product-carousel-price">Quantity: <ins><?php echo $qty ?></ins></h6>
             <h6 class="product-carousel-price">Category: <ins><?php echo $cateName ?></ins></h6>
             <h6 class="product-carousel-price">Supplier: <ins><?php echo $supName ?></ins></h6>
+            <h6 class="product-carousel-price">Shop: <ins><?php echo $shopName ?></ins></h6>
         </div>
 </div>
 <div class="brands-area">

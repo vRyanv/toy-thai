@@ -1,6 +1,8 @@
   
 <?php
 include_once("connection.php");
+
+
 ?>
 <!--slider-->
 <div class="slider-area">
@@ -71,18 +73,27 @@ include_once("connection.php");
                 <div class="col-md-12">
                     <div class="latest-product">
                         <h2 class="section-title">Product</h2>
-                        <div class="product-carousel">
+                        <div id="search-area" style="position: absolute;right: 0">
+                             <div id="search_box_product" role="search">
+                                 <form action="" method="post">
+                                      <input class="" style="height: 2.7rem;padding: 1rem;" name="txtSearch" type="search" placeholder="Search" aria-label="Search">
+                                      <input style="vertical-align: baseline" class="btn btn-outline-success" type="submit" name="btnSearchPro" value="Search">
+                                 </form>
+                             </div>
+                        </div>
+                        <div class="product-carousel" style="margin-top: 6rem">
                         
                         <!--Load san pham tu DB -->
                            <?php
-						  // 	include_once("database.php");
-		  				   	$result = pg_query($conn, "SELECT * FROM product" );
-
-			                if (!$result) { //add this check.
+                            if(isset($_POST['btnSearchPro'])){
+                                $proName = $_POST['txtSearch'];
+                                $result = pg_query($conn, "SELECT * FROM product where product_name like '%$proName%'");
+                            } else{
+                                $result = pg_query($conn, "SELECT * FROM product");
+                            }
+			                if (!$result) {
                                 die('Invalid query: ' . pg_result_error($conn));
                             }
-		
-			            
 			                while($row = pg_fetch_array($result,null, PGSQL_ASSOC)){
 				            ?>
 

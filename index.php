@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- Tao menu cap -->
     <link href="csseshop/font-awesome.min.css" rel="stylesheet">
     <link href="csseshop/prettyPhoto.css" rel="stylesheet">
@@ -80,7 +80,7 @@ if(isset($_GET['page']))
                     <a class="nav-link <?php if($page == 'supplier_management' || $page == 'add_supplier' || $page == 'update_supplier') {?>animate-character <?php } ?>" href="?page=supplier_management">Supplier</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($page == 'product_management') {?>animate-character <?php } ?>"  href="?page=product_management">Product</a>
+                    <a class="nav-link <?php if($page == 'product_management' || $page == 'update_product' || $page == 'add_product') {?>animate-character <?php } ?>"  href="?page=product_management">Product</a>
                 </li>
                 <?php
                 }
@@ -118,7 +118,7 @@ if(isset($_GET['page']))
         </div>
     </div>
 </nav>
-<div style="padding-top: 4.7rem;min-height: 54rem;">
+<div style="padding-top: 4.7rem;min-height: 60rem;">
     <?php
     if(isset($_GET['page']))
     {

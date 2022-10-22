@@ -24,28 +24,25 @@ if(isset($_POST['btnRegister']))
     if($us=="" || $pass1=="" || $pass2=="" || $fullname =="" || $email=="" ||
      $address=="" || !isset($sex))
     {
-        $err .= "<li<Enter fields with mark (*), please</li>";
+        $err .= "<li style='color: red'>Enter fields with mark (*), please</li>";
     }
     if(strlen($pass1)<=5)
     {
-    $err .="<li>Password must be greater than 5 chars</li>";
+    $err .="<li style='color: red'>Password must be greater than 5 chars</li>";
     }
 
     if($pass1!=$pass2)
     {
-        $err .="<li>Password and confirm password are the same</li>";
+        $err .="<li style='color: red'>Password and confirm password are the same</li>";
     }
 
     if($_POST['slYear']==0)
     {
-        $err .="<li>Choose Year of Birth, please</li>";
+        $err .="<li style='color: red'>Choose Year of Birth, please</li>";
     }
 
-    if($err!="")
+    if($err=="")
     {
-        echo $err;
-    }
-    else{
         include_once("connection.php");
         $pass = md5($pass1);
         $sq= "SELECT * FROM customer WHERE username= '$us' OR email= '$email'";
@@ -56,17 +53,18 @@ if(isset($_POST['btnRegister']))
             email, cusdate, cusmonth, cusyear, state)
             VALUES ('$us', '$pass', '$fullname', $sex, '$address', '$tel', '$email',
             $date, $month, $year, 0)") or die("error");
-            echo "You have registered successfully";
+            $err .= "<li style='color: green'>You have registered successfully</li>";
         }
         else{
-            echo "Username or email already exists";
+            $err .= "<li style='color: red'>Username or email already exists</li>";
         }
     }
+
 }
 
 
 ?>
-<div class="" style="padding: 5% 22% 6% 20%;">
+<div class="" style="padding: 14% 22% 6% 20%;">
             <div class="content" style="transform: translateX(28%);">
                 <h2>Member Registration</h2>
                 <h2>Member Registration</h2>
@@ -181,6 +179,16 @@ if(isset($_POST['btnRegister']))
 						</div>
                      </div>
 				</form>
+                <ul style="text-align: center">
+                    <?php
+                       if(isset($err) && $err != ''){
+
+                    ?>
+                     <?php echo $err ?>
+                    <?php
+                       }
+                    ?>
+                </ul>
 </div>
     
 

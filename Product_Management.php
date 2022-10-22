@@ -40,6 +40,21 @@ if(isset($_GET["function"])=="del")
  <!-- Bootstrap -->
     <div style="padding: 2rem 2rem 0 2rem;">
         <form name="frm" method="post" action="">
+            <?php
+                if(isset($_SESSION['shop'])){
+                    $shopId = $_SESSION['shop'];
+                    $result =  pg_query($conn, "select * from shop where shop_id ='$shopId'");
+                    $row= pg_fetch_array($result, null, PGSQL_ASSOC);
+                    $shopName = $row['shop_name'];
+                    $shopAddress = $row['shop_address'];
+                }
+            ?>
+            <div style="color: red">
+                <i class="bi-shop" ></i> Shop: <?php echo $shopName ?>
+         </div>
+         <div style="color: saddlebrown">
+             <i class="bi-geo-alt" ></i> Address: <?php echo $shopAddress ?>
+         </div>
         <p style="text-align: end">
         	<img src="images/add.png" alt="Add new" width="16" height="16" border="0" /><a href="?page=add_product" style="color: black!important;"> Add new</a>
         </p>
@@ -65,7 +80,8 @@ if(isset($_GET["function"])=="del")
                 $query = "SELECT p.product_id, p.product_name, p.price, p.pro_qty, p.pro_image, c.cat_name, sp.sup_name
                             FROM product as p, category as c, supplier as sp
                             WHERE p.cat_id= c.cat_id
-                            and p.sup_id = sp.sup_id";
+                            and p.sup_id = sp.sup_id
+                            and p.shop_id = '$shopId'";
                 $result = pg_query($conn, $query);
 
                 While($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
