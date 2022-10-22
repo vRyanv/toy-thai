@@ -351,6 +351,8 @@ z-index: 999;}
 
 .promo-area .zigzag-bottom, .brands-area .zigzag-bottom{background: #f4f4f4}
 .single-promo {
+    width: 17rem;
+    height: 21rem;
     font-size: 25px;
     font-weight: 200;
     padding: 20px 10px;
@@ -502,6 +504,11 @@ z-index: 999;}
     margin-bottom: 31px;
     overflow: hidden;
 }
+
+.single-wid-product h2 a{
+    color: black!important;
+}
+
 .product-thumb {
     float: left;
     height: 90px;
@@ -1120,4 +1127,51 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 
 .pagination > li > a, .pagination > li > span {
   color: #5a88ca;
+}
+
+.current{
+    color: darkred!important;
+    font-weight: 900;
+}
+
+.nav-item{
+    margin-right: 1rem;
+}
+
+.nav-link{
+    font-size: larger;
+    font-weight: 900;
+}
+
+
+.animate-character
+{
+    text-transform: uppercase;
+    background-image: linear-gradient(
+            -225deg,
+            #5a88ca 0%,
+            #ffd900 29%,
+            #fa8072 67%,
+            #4abebd 100%
+    );
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline-block;
+}
+
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.owl-nav{
+    display: none;
 }

@@ -29,8 +29,8 @@ if (isset($_POST['btnLogin']))
         $pass = md5($pa);
         $res = pg_query($conn, "SELECT Username, State,  Password FROM Customer WHERE Username='$us' AND Password='$pass'")
         or die(pg_result_error($conn));
-        $row = PG_fetch_array($res, PGSQL_ASSOC);
-        if(PG_num_rows($res)==1){
+        $row = pg_fetch_array($res, PGSQL_ASSOC);
+        if(pg_num_rows($res)==1){
             $_SESSION["us"] = $us;
             $_SESSION["admin"] = $row['State'];
             echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';

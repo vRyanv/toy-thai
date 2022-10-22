@@ -1,17 +1,15 @@
      <!-- Bootstrap --> 
     <link rel="stylesheet" type="text/css" href="style.css"/>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" href="css/bootstrap.min.css">
 <?php
     include_once("connection.php");
 	if(isset($_GET["id"]))
 	{
 		$id = $_GET["id"];
-		$result = pg_query($conn, "SELECT * FROM category WHERE Cat_ID='$id'");
-		$row = pg_fetch_array($result, PGSQL_ASSOC);
-		$cat_id = $row['Cat_ID'];
-		$cat_name = $row['Cat_Name'];
-		$cat_des = $row['Cat_Des'];				
+		$result = pg_query($conn, "SELECT * FROM category WHERE cat_id='$id'");
+		$row = pg_fetch_array($result, null,PGSQL_ASSOC);
+		$cat_name = $row['cat_name'];
+		$cat_des = $row['cat_des'];
 	}
 	else
 	{
@@ -19,16 +17,10 @@
 	}	
 ?>
 
-<div class="container">
-	<h2>Updating Product Category</h2>
+<div class="" style="padding: 4rem 23rem 1rem 33rem;">
+	<h3 style="text-align: start; padding-left: 1rem">Updating Category</h3>
 			 	<form id="form1" name="form1" method="post" action="" class="form-horizontal" role="form">
-				 <div class="form-group">
-						    <label for="txtTen" class="col-sm-2 control-label">Category ID(*):  </label>
-							<div class="col-sm-10">
-								  <input type="text" name="txtID" id="txtID" class="form-control" placeholder="Catepgy ID" readonly 
-								  value='<?php echo $cat_id ;?>'>
-							</div>
-					</div>	
+                    <input type="hidden" value='<?php echo $id ;?>' name="txtId">
 				 <div class="form-group">
 						    <label for="txtTen" class="col-sm-2 control-label">Category Name(*):  </label>
 							<div class="col-sm-10">
@@ -46,46 +38,54 @@
 					</div>
                     
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-2 col-sm-10" style="text-align: end">
 						      <input type="submit"  class="btn btn-primary" name="btnUpdate" id="btnUpdate" value="Update"/>
-                              <input type="button" class="btn btn-primary" name="btnIgnore"  id="btnIgnore" value="Ignore" onclick="window.location='Category_Management.php'" />
-                              	
 						</div>
 					</div>
 				</form>
+                <div style="text-align: center">
+                    <ul id="error_cate">
+                    </ul>
+                </div>
 	</div>
 
 
 
 <?php
-   if(isset($_POST["btnUpdate"]))
-   {
-	   $id = $_POST["txtID"];
-	   $name = $_POST["txtName"];
-	   $des = $_POST["txtDes"];
-	   $err="";
-	   if($name=="")
-	   {
-		   $err.="<li>Enter Category name, Pls<li>";
-	   }
-	   if($err!="")
-	   {
-		   echo "<ul>$err</ul>";
-	   }
-	   else
-	   {
-		   $sq = "Select * from category where Cat_ID != '$id' and Cat_Name='$name'";
-		   $result= pg_query($conn,$sq);
-		   if(pg_num_rows($result)==0)
-		   {
-			   pg_query($conn, "UPDATE category SET Cat_Name = '$name', Cat_Des='$des' WHERE Cat_ID='$id'");
-			   echo '<meta http-equiv="refresh" content="0;URL=?page=category_management"/>';
-		   }
-		   else
-		   {
-			   echo "<li>Duplicate category Name</li>";
-		   }
-	   }
-	}
+   if(isset($_POST["btnUpdate"])) {
+       $id = $_POST["txtId"];
+       $name = $_POST["txtName"];
+       $des = $_POST["txtDes"];
+       $err = "";
+       if ($name == "") {
+           $err .= "<li style='color: red'>Enter Category name<li>";
+       }
+       if ($des == "") {
+           $err .= "<li style='color: red'>Enter Category description<li>";
+       }
+       if ($err == "") {
+           $sq = "Select * from category where cat_name='$name'";
+           $result = pg_query($conn, $sq);
+           if (pg_num_rows($result) != 1) {
+               pg_query($conn, "UPDATE category SET cat_name = '$name', cat_des='$des' WHERE cat_id='$id'");
+               echo '<meta http-equiv="refresh" content="0;URL=?page=category_management"/>';
+           } else {
+               $err .=  "<li style='color: red'>Duplicate category Name</li>";
+           }
+       }
+   }
 ?>
-      
+
+     <?php
+     if(isset($err) && $err != ''){
+         ?>
+         <script>
+             $(document).ready(function (){
+                 $('#error_cate').append("<?php echo $err ?>")
+             })
+         </script>
+         <?php
+     }
+     ?>
+
+
