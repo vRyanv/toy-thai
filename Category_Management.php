@@ -2,7 +2,13 @@
     if(session_id() == '') {
         session_start();
     }
-    if(isset($_SESSION["role"]) && $_SESSION["role"] != 1)
+    if(!isset($_SESSION['role'])) {
+        ?>
+        <script>alert("You are not admin")</script>
+        <?php
+        echo '<meta http-equiv="refresh" content="0;URL=index.php"/>';
+    } else{
+    if( $_SESSION["role"] != 1)
     {
         ?>
         <script>alert("You are not admin")</script>
@@ -92,6 +98,7 @@ if(isset($_GET["function"])=="del")
  </form>
 </div>
 <?php
+    }
     }
 ?>
  
